@@ -16,12 +16,12 @@ function addEvent() {
     console.log('addEvent');
     $.ajax({
         type: 'POST',
-        //contentType: 'application/json',
+        contentType: 'application/json',
         url: rootURL,
         dataType: "json",
         data: formToJSON(),
         success: function (data, textStatus, jqXHR) {
-            alert('Wine created successfully');
+            alert('Evento creado satisfactoriamente');
             window.location = "listadoEventos.html";
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -32,14 +32,15 @@ function addEvent() {
 
 function formToJSON() {
     return JSON.stringify({
-        nombre : $('#nombreEVento').val(),
+        nombre : $('#nombreEvento').val(),
         descripcion: $('#descripcionEvento').val(),
         direccion: $('#direccionEvento').val(),
         fechainicio: $('#fechainicio').val(),
         fechafin: $('#fechafin').val(),
         longitud: $('#longitudEvento').val(),
         latitud: $('#latitudEvento').val(),
-        creador: { apellidos :"Fernández", email :"cardenitas96@gmail.com", nombre :"Antonio", password :"adri", tipousuario :1}
+        creador: {email :"cardenitas96@gmail.com"},
+        validado: false
     });
 }
 

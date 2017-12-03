@@ -11,32 +11,26 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="jquery-1.7.1.min.js"></script>
-        <script src="main.js"></script>
-
-
-
+        <script src="CrearEvento.js"></script>
     </head>
     <body>
-        <form>
+        
             <div class="container">
                 <h4>Nombre</h4>
-                <input id="nombreEvento" type="text" name="nombre" value="" /><br/>
+                <input id="nombreEvento" type="text" value="" /><br/>
                 <h4>Descripción</h4>
-                <textarea id="descripcionEvento" name="descripcion" rows="6" cols="80" style="resize: none;"></textarea><br/>
+                <textarea id="descripcionEvento"  rows="6" cols="80" style="resize: none;"></textarea><br/>
                 <h4>Fecha inicio</h4>
-                <input id="fechainicio" type="datetime-local" name="fechainicio"><br/>
+                <input id="fechainicio" type="datetime-local" ><br/>
                 <h4>Fecha fin</h4>
-                <input id="fechafin" type="datetime-local" name="fechafin"><br/>
+                <input id="fechafin" type="datetime-local"><br/>
                 <h4>Dirección</h4>
-                <input id="direccionEvento" type="text" name="direccion" value="" /><br/>
+                <input id="direccionEvento" type="text" value="" /><br/>
                 <h4>Latitud</h4>
-                <input id="latitudEvento" type="text" name="latitud" value="" /><br/>
+                <input id="latitudEvento" type="text" value="" /><br/>
                 <h4>Longitud</h4>
-                <input id="longitudEvento" type="text" name="longitud" value="" /><br/>
+                <input id="longitudEvento" type="text" value="" /><br/>
                 <button id="crearEvento" class="btn btn-success">Crear evento</button>
             </div>
-        </form>
-
-
     </body>
 </html>
