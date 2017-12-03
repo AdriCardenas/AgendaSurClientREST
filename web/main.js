@@ -144,11 +144,8 @@ function deleteEvent(id) {
     $.ajax({
         type: 'DELETE',
         url: rootURL + '/' + id.toString(),
-        success: function (data, textStatus, jqXHR) {
-            alert('Event deleted successfully');
-        },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('deleteWine error');
+            alert('ERROR: ¡Ups!, ha habido un error al eliminar un evento');
         }
     });
 }
@@ -171,7 +168,7 @@ function renderList(data) {
 
 
     $.each(list, function (index, event) {
-        var row = $('<tr></tr>');
+        var row = $('<tr id='+ event.id +'></tr>');
         var cell = $('<td></td>');
         
         var botonVer = $('<button/>', {
@@ -188,10 +185,12 @@ function renderList(data) {
         });
         var botonEliminar = $('<button/>', {
             text: 'Eliminar',
-            class: 'btn btn-danger'
+            class: 'btn btn-danger',
                     // id: 'btn_refresh'
-           // click: deleteEvent(event.id)
-            
+            click: function(){
+                deleteEvent(event.id);
+                $(this).closest('tr').remove();
+            }
         });
         row.append('<td>' + event.nombre + '</td>');
         row.append('<td>' + event.descripcion + '</td>');
