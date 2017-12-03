@@ -1,4 +1,6 @@
 // The root URL for the RESTful services
+$(document).ready(function(){
+    
 var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
 
 var currentEvent;
@@ -25,8 +27,8 @@ $('#searchKey').keypress(function (e) {
 });
 
 $('#btnAdd').click(function () {
-    newEvent();
-    return false;
+    window.location.replace("crearEvento.html");
+    return true;
 });
 
 $('#btnSave').click(function () {
@@ -53,7 +55,7 @@ $("img").error(function () {
 });
 
 
-$("#datepicker").datepicker();
+//$("#datepicker").datepicker();
 
 
 function search(searchKey) {
@@ -61,11 +63,6 @@ function search(searchKey) {
         findAll();
     else
         findByName(searchKey);
-}
-
-function newEvent() {
-    window.location="crearEvento.html";
-   
 }
 
 function findAll() {
@@ -236,3 +233,6 @@ function formToJSON() {
         "description": $('#description').val()
     });
 }
+
+
+});
