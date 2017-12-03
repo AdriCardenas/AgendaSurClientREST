@@ -8,88 +8,15 @@ and open the template in the editor.
     <head>
         <title>Agenda Sur</title>
         <style>
-            button {
-                padding: 1em;
+            body{
+                background-color: #8bd4ff
             }
         </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="jquery-1.7.1.min.js"></script>
-        <script src="main.js">
-
-
-            /* var xhttp;
-             function createConnection() {
-             xhttp = new XMLHttpRequest();
-             }
-             
-             createConnection();
-             xhttp.onreadystatechange = handleResponse;
-             var url = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
-             console.log(url);
-             xhttp.open("GET", url, true);
-             xhttp.send(null);
-             
-             
-             function handleResponse() {
-             
-             if (xhttp.readyState == 4 && xhttp.status == 200) {
-             var texto = JSON.parse(xhttp.responseText);
-             //var node = document.createElement("TR");
-             //var node2 = document.createElement("TD");
-             
-             //var tr;
-             for(var i = 0; i < texto.length; i++){
-             var node = document.createElement("TR");
-             var node2 = document.createElement("TD");
-             var text;
-             
-             text = document.createTextNode(texto[i].nombre);
-             node2.appendChild(text);
-             node.appendChild(node2);
-             
-             var node2 = document.createElement("TD");
-             text = document.createTextNode(texto[i].descripcion);
-             node2.appendChild(text);
-             node.appendChild(node2);
-             
-             var node2 = document.createElement("TD");
-             text = document.createTextNode(texto[i].fechainicio);
-             node2.appendChild(text);
-             node.appendChild(node2);
-             
-             var node2 = document.createElement("TD");
-             text = document.createTextNode(texto[i].fechafin);
-             node2.appendChild(text);
-             node.appendChild(node2);
-             
-             var node2 = document.createElement("TD");
-             text = document.createTextNode(texto[i].direccion);
-             node2.appendChild(text);
-             node.appendChild(node2);
-             
-             
-             tr = texto[i].descripcion ;
-             tr = texto[i].fechainicio;
-             tr = texto[i].fechafin;
-             tr = texto[i].direccion;
-             
-             node.appendChild(node2);
-             
-             document.getElementById('table').appendChild(node);
-             }
-             
-             
-             document.getElementById('customerid').value = texto.customerId;
-             document.getElementById('name').value = texto.name;
-             document.getElementById('address').value = texto.addressline1;
-             document.getElementById('email').value = texto.email;
-             
-             }
-             }*/
-        </script>
-
+        <script src="main.js"></script>
     </head>
     <body>
 
@@ -97,10 +24,10 @@ and open the template in the editor.
             <div class="page-header">
                 <h1>Eventos</h1>
             </div>
-            <div class="header">
+            <div class="header" style="padding-bottom: 1em">
                 <input type="text" id="searchKey"/>
-                <button id="btnSearch">Buscar</button>
-                <button id="btnAdd">Nuevo Evento</button>
+                <button id="btnSearch" class="btn btn-info">Buscar</button>
+                <a href="crearEvento.html">Nuevo evento</a>
             </div>
             <table class="table" id="table" border="1">
                 <tr>
