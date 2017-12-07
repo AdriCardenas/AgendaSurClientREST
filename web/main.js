@@ -69,7 +69,7 @@ function findAll() {
     console.log('findAll');
     $.ajax({
         type: 'GET',
-        url: rootURL,
+        url: rootURL + "/eventosNoCaducadosYValidados",
         dataType: "json", // data type of response
         success: renderList
     });
@@ -171,8 +171,14 @@ function renderList(data) {
         var botonVer = $('<button/>', {
             text: 'Ver',
             class: 'btn btn-success',
-                    // id: 'btn_refresh'
-                    // click: ClickRefresh
+            id: 'btn_refresh' + event.id,
+            click: function(){
+                localStorage.setItem("evento", JSON.stringify(event));
+                console.log(event);
+                //.then(function (response) {
+                window.location = "verEvento.html";
+            //})
+            }
             
         });var botonModificar = $('<button/>', {
             text: 'Modificar',
