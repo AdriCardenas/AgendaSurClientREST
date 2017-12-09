@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Crear Evento</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
@@ -16,23 +16,28 @@ and open the template in the editor.
         <script src="js/CrearEvento.js"></script>
     </head>
     <body>
-        
-            <div class="container">
-                <h4>Nombre</h4>
-                <input id="nombreEvento" type="text" value="" /><br/>
-                <h4>Descripción</h4>
-                <textarea id="descripcionEvento"  rows="6" cols="80" style="resize: none;"></textarea><br/>
-                <h4>Fecha inicio</h4>
-                <input id="fechainicio" type="datetime-local" ><br/>
-                <h4>Fecha fin</h4>
-                <input id="fechafin" type="datetime-local"><br/>
-                <h4>Dirección</h4>
-                <input id="direccionEvento" type="text" value="" /><br/>
-                <h4>Latitud</h4>
-                <input id="latitudEvento" type="text" value="" /><br/>
-                <h4>Longitud</h4>
-                <input id="longitudEvento" type="text" value="" /><br/>
-                <button id="crearEvento" class="btn btn-success">Crear evento</button>
-            </div>
+
+        <div class="container">
+            <h4>Nombre</h4>
+            <input id="nombreEvento" required type="text" value="" /><br/>
+            <h4>Descripción</h4>
+            <textarea id="descripcionEvento" required rows="6" cols="80" style="resize: none;"></textarea><br/>
+            <h4>Fecha inicio</h4>
+            <input id="fechainicio" required type="datetime-local" ><br/>
+            <h4>Fecha fin</h4>
+            <input id="fechafin" required type="datetime-local"><br/>
+            <h4>Dirección</h4>
+            <input id="direccionEvento" required type="text" value="" /><br/>
+            <h4>Latitud</h4>
+            <input id="latitudEvento" required type="text" value="" /><br/>
+            <h4>Longitud</h4>
+            <input id="longitudEvento" required type="text" value="" /><br/>
+            <select multiple class="form-control" id="selectTag">
+                
+            </select><br/>
+            <button id="crearEvento" class="btn btn-success">Crear evento</button>
+            
+
+        </div>
     </body>
 </html>

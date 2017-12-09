@@ -3,45 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function(){
-    
-var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
 
-$('#crearEvento').click(function (){
-    addEvent();
-    return false;
-});
+$(document).ready(function () {
 
-function addEvent() {
-    console.log('addEvent');
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: rootURL,
-        dataType: "json",
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
-            alert('Evento creado satisfactoriamente');
-            window.location = "listadoEventos.html";
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('addWine error: ' + textStatus);
+    var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.";
+
+    $('#crearEvento').click(function () {
+        addEvent();
+        return false;
+    });
+
+    findAllTag();
+
+    function findAllTag() {
+        console.log(rootURL + 'tag')
+        $.ajax({
+            type: 'GET',
+            url: rootURL + 'tag',
+            contentType: 'application/json',
+            dataType: "json", // data type of response
+            success: mostrarDatos
+        });
+    }
+    function mostrarDatos(data) {
+        var list = data == null ? [] : (data instanceof Array ? data : [data]);
+
+        $.each(list, function (index, tag) {
+            console.log(tag.nombre);
+            var select = $('<option></option><br/>');
+            select.val(tag.nombre);
+            select.append(tag.nombre);
+            $('#selectTag').append(select);
+        });
+    }
+    function addEvent() {
+        console.log('addEvent');
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: rootURL + 'evento',
+            data: formToJSON(),
+            success: function (response) {
+                console.log(response);
+                window.location = "listadoEventos.html";
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        });
+    }
+
+    function formToJSON() {
+        console.log($('#selectTag').val());
+        
+        return JSON.stringify({
+            creador: 'cardenitas96@gmail.com',
+            descripcion: $('#descripcionEvento').val(),
+            direccion: $('#direccionEvento').val(),
+            fechainicio: $('#fechainicio').val(),
+            fechafin: $('#fechafin').val(),
+            longitud: $('#longitudEvento').val(),
+            latitud: $('#latitudEvento').val(),
+            nombre: $('#nombreEvento').val(),
+            tags: $('#selectTag').val()
         }
-    });
-}
-
-function formToJSON() {
-    return JSON.stringify({
-        nombre : $('#nombreEvento').val(),
-        descripcion: $('#descripcionEvento').val(),
-        direccion: $('#direccionEvento').val(),
-        fechainicio: $('#fechainicio').val(),
-        fechafin: $('#fechafin').val(),
-        longitud: $('#longitudEvento').val(),
-        latitud: $('#latitudEvento').val(),
-        creador: {email :"cardenitas96@gmail.com"},
-        validado: false
-    });
-}
+        );
+    }
 
 });
