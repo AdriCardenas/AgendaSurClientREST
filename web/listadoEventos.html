@@ -14,26 +14,16 @@ and open the template in the editor.
         </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="jquery-1.7.1.min.js"></script>
-        <script src="main.js"></script>
-        
-        <style>
-            body{
-                background-color: #9ce5ff;
-            }
-            
-            .container{
-                background-color: #eeeeee;
-                height: 100%;
-            }
-            .table{
-                background-color: #ffffff;
-            }
-        </style>
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/index.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container container2">
             <div class="page-header">
                 <h1>Eventos</h1>
             </div>
@@ -41,6 +31,7 @@ and open the template in the editor.
                 <input type="text" id="searchKey"/>
                 <button id="btnSearch" class="btn btn-info">Buscar</button>
                 <button id="btnAdd" class="btn btn-info">Nuevo evento</button>
+                <button id="btnAdd" class="btn btn-danger" onclick="handleSignOutClick()">Log out</button>
             </div>
             <table class="table" id="table" border="1">
                 <tr>
@@ -50,11 +41,7 @@ and open the template in the editor.
                     <th>Fecha fin</th>
                     <th>Ubicación</th>
                 </tr>
-
             </table>
-            
         </div>
-
-
     </body>
 </html>
