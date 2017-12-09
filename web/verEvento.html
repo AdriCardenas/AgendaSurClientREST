@@ -54,8 +54,17 @@ and open the template in the editor.
                                 animation: google.maps.Animation.DROP,
                                 title: nombreEvento
                             });
+                            
+                            var infowindow = new google.maps.InfoWindow({
+                                content: nombreEvento
+                            });
+// Adding a click event to the marker
+                            google.maps.event.addListener(marker, 'click', function () {
+// Calling the open method of the infoWindow
+                                infowindow.open(map, marker);
+                            });
                         }
-                        
+
                     </script>
                 </div>
             </div>
