@@ -13,7 +13,6 @@ and open the template in the editor.
         <script src="js/verEvento.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ88yUrHYcUimr-N19KWUK5W5PjDLjrzQ&callback=initMap"
                 async defer>
-
         </script>
     </head>
     <body>
@@ -40,16 +39,16 @@ and open the template in the editor.
                     <div style="width:1000px; height:800px;">
                         <div id="map-canvas" style="width: 100%; height: 60%"></div>
                     </div>
+                    <!--
                     <script>
                         function initMap() {
                             map = new google.maps.Map(document.getElementById('map-canvas'), {
-                                center: {lat: latitud, lng: longitud},
+                                center: new google.maps.LatLng(latitud, longitud),
                                 zoom: 15,
                                 draggable: true
-
                             });
                             var marker = new google.maps.Marker({
-                                position: {lat: latitud, lng: longitud},
+                                position: new google.maps.LatLng(latitud, longitud),
                                 map: map,
                                 animation: google.maps.Animation.DROP,
                                 title: nombreEvento
@@ -64,8 +63,8 @@ and open the template in the editor.
                                 infowindow.open(map, marker);
                             });
                         }
-
                     </script>
+                    -->
                 </div>
             </div>
         </div>

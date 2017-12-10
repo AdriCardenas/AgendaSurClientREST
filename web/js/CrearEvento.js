@@ -55,19 +55,35 @@ $(document).ready(function () {
 
     function formToJSON() {
         console.log($('#selectTag').val());
-        
-        return JSON.stringify({
-            creador: 'cardenitas96@gmail.com',
-            descripcion: $('#descripcionEvento').val(),
-            direccion: $('#direccionEvento').val(),
-            fechainicio: $('#fechainicio').val(),
-            fechafin: $('#fechafin').val(),
-            longitud: $('#longitudEvento').val(),
-            latitud: $('#latitudEvento').val(),
-            nombre: $('#nombreEvento').val(),
-            tags: $('#selectTag').val()
+
+        if ($('#selectTag').val() == null || $('#selectTag').val().isEmptyObject()) {
+            return JSON.stringify({
+                creador: 'cardenitas96@gmail.com',
+                descripcion: $('#descripcionEvento').val(),
+                direccion: $('#direccionEvento').val(),
+                fechainicio: $('#fechainicio').val(),
+                fechafin: $('#fechafin').val(),
+                longitud: $('#longitudEvento').val(),
+                latitud: $('#latitudEvento').val(),
+                nombre: $('#nombreEvento').val()
+            }
+            );
+        } else {
+            return JSON.stringify({
+                creador: 'cardenitas96@gmail.com',
+                descripcion: $('#descripcionEvento').val(),
+                direccion: $('#direccionEvento').val(),
+                fechainicio: $('#fechainicio').val(),
+                fechafin: $('#fechafin').val(),
+                longitud: $('#longitudEvento').val(),
+                latitud: $('#latitudEvento').val(),
+                nombre: $('#nombreEvento').val(),
+                tags: $('#selectTag').val()
+            }
+            );
         }
-        );
+
+
     }
 
 });
