@@ -216,7 +216,7 @@ $(document).ready(function () {
             var botonVer = $('<button/>', {
                 text: 'Ver',
                 class: 'btn btn-success',
-                id: 'btn_refresh' + event.id,
+                id: 'btn_ver' + event.id,
                 click: function () {
                     localStorage.setItem("evento", JSON.stringify(event));
                     console.log(event);
@@ -228,9 +228,13 @@ $(document).ready(function () {
             });
             var botonModificar = $('<button/>', {
                 text: 'Modificar',
-                class: 'btn btn-warning'
-                        // id: 'btn_refresh'
-                        // click: ClickRefresh
+                class: 'btn btn-warning',
+                id: 'btn_modificar' + event.id,
+                click: function (){
+                    localStorage.setItem("evento", JSON.stringify(event));
+                    console.log(event);
+                    window.location = "modificarEvento.html";
+                }
             });
             var botonEliminar = $('<button/>', {
                 text: 'Eliminar',
@@ -313,9 +317,13 @@ $(document).ready(function () {
             });
             var botonModificar = $('<button/>', {
                 text: 'Modificar',
-                class: 'btn btn-warning'
-                        //id: 'btn_refresh'
-                        // click: ClickRefresh
+                class: 'btn btn-warning',
+                id: 'btn_modificar' + event.id,
+                click: function (){
+                    localStorage.setItem("evento", JSON.stringify(event));
+                    console.log(event);
+                    window.location = "modificarEvento.html";
+                }
             });
             var botonEliminar = $('<button/>', {
                 text: 'Eliminar',
