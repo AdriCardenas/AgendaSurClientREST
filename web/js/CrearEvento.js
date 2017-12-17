@@ -16,7 +16,7 @@ $(document).ready(function () {
     findAllTag();
 
     function findAllTag() {
-        console.log(rootURL + 'tag')
+        console.log(rootURL + 'tag');
         $.ajax({
             type: 'GET',
             url: rootURL + 'tag',

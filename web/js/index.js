@@ -1,3 +1,4 @@
+
 function handleClientLoad() {
     // Loads the client library and the auth2 library together for efficiency.
     // Loading the auth2 library is optional here since `gapi.client.init` function will load
@@ -31,6 +32,8 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         //alert('Conectado correctamente');
         makeApiCall();
+        addUser();
+
     }
 }
 
@@ -41,18 +44,26 @@ function handleSignInClick(event) {
 }
 
 function handleSignOutClick(event) {
-    gapi.auth2.getAuthInstance().signOut();
+    gapi.auth2.getAuthInstance().disconnect();
+    window.location = "index.html";
 }
 
 function makeApiCall() {
     // Make an API call to the People API, and print the user's given name.
     gapi.client.people.people.get({
         'resourceName': 'people/me',
-        'requestMask.includeField': 'person.names'
+        'personFields': 'emailAddresses,names'
     }).then(function (response) {
         console.log(response);
-        console.log('Hello, ' + response.result.names[0].givenName);
+        //console.log('Hello, ' + response.result.names[0].givenName);
+        var nombre = response.result.names[0].givenName;
+        var apellido = response.result.names[0].familyName;
+        var email = response.result.emailAddresses[0].value;
         //alert('Hola, ' + response.result.names[0].givenName);
+        localStorage.setItem("nombreUsuario", nombre);
+        localStorage.setItem("apellidoUsuario", apellido);
+        localStorage.setItem("emailUsuario", email);
+
         window.location = "listadoEventos.html";
     }, function (reason) {
         console.log('Error: ' + reason.result.error.message);
