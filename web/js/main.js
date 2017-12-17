@@ -3,6 +3,10 @@ $(document).ready(function () {
 
     var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
 
+    var nombre = localStorage.getItem('nombreUsuario');
+    var apellido = localStorage.getItem('apellidoUsuario');
+    var email = localStorage.getItem('emailUsuario');
+
     var latitud;
     var longitud;
 
@@ -14,6 +18,8 @@ $(document).ready(function () {
             console.log("Geolocation is not supported by this browser.");
         }
     });
+
+    addUser();
 
 // Retrieve wine list when application starts 
     findAll();
@@ -371,5 +377,48 @@ $(document).ready(function () {
         });
     }
 
+    function findAllTag() {
+        console.log(rootURL + 'tag');
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.tag' + '/',
+            contentType: 'application/json',
+            dataType: "json", // data type of response
+            success: mostrarDatos
+        });
+    }
+    function mostrarDatos(data) {
+        var list = data == null ? [] : (data instanceof Array ? data : [data]);
+
+        $.each(list, function (index, tag) {
+            console.log(tag.nombre);
+            var select = $('<option></option><br/>');
+            select.val(tag.nombre);
+            select.append(tag.nombre);
+            $('#selectTag').append(select);
+        });
+    }
+
+    function addUser() {
+        console.log(nombre);
+        console.log(apellido);
+        console.log(email);
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.usuario',
+            dataType: "json",
+            data: JSON.stringify({
+                "nombre": nombre,
+                "apellidos": apellido,
+                "email": email
+            }),
+            success: function (data, textStatus, jqXHR) {
+                alert('Usuario creado correctamente, señora.');
+            }
+        });
+
+
+    }
 
 });
