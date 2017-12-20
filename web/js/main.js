@@ -20,30 +20,6 @@ $(document).ready(function () {
     });
 
     addUser();
-    
-    
-
-// Retrieve wine list when application starts 
-    
-    
-
-// Nothing to delete in initial application state
-    $('#btnDelete').hide();
-
-// Register listeners
-    $('#btnSearch').click(function () {
-        search($('#searchKey').val());
-        return false;
-    });
-
-// Trigger search when pressing 'Return' on search key input field
-    $('#searchKey').keypress(function (e) {
-        if (e.which == 13) {
-            search($('#searchKey').val());
-            e.preventDefault();
-            return false;
-        }
-    });
 
     $('#btnAdd').click(function () {
         window.location.replace("crearEvento.html");
@@ -58,6 +34,11 @@ $(document).ready(function () {
     $('#btnNoValidados').click(function () {
         findAllNoValidados();
         return false;
+    });
+    
+    $('#btnAdminUsuarios').click(function (){
+       window.location = "listadoUsuarios.html";
+       return true;
     });
 
 
