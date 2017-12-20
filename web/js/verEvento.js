@@ -12,6 +12,8 @@ $(document).ready(function () {
     var jsonEvento = JSON.parse(retrievedObject);
 
     nombreEvento = jsonEvento.nombre;
+   
+    buscarComentariosDeEvento();
 
     document.getElementById('nombreEvento').innerHTML = nombreEvento;
     document.getElementById('descripcionEvento').innerHTML = jsonEvento.descripcion;
@@ -94,6 +96,25 @@ $(document).ready(function () {
                 i++;
             }
         }
+    }
+    
+    function buscarComentariosDeEvento() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.comentario' + '/comentario/' + jsonEvento.id,
+            contentType: 'application/json',
+            dataType: "json", // data type of response
+            success: mostrarComentarios
+        });
+    }
+    
+    function mostrarComentarios(data){
+        var list = data == null ? [] : (data instanceof Array ? data : [data]);
+        
+        $.each(list, function (index, comentario) {
+            var parrafo = $('<p>' + comentario.comentario + '</p>');
+            $('#div-comentarios').append(parrafo);
+        });
     }
     
 });
