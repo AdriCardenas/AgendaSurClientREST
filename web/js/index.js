@@ -32,7 +32,7 @@ function updateSigninStatus(isSignedIn) {
     if (isSignedIn) {
         //alert('Conectado correctamente');
         makeApiCall();
-        addUser();
+        //addUser();
 
     }
 }

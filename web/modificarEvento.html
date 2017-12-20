@@ -23,9 +23,9 @@ and open the template in the editor.
             <h4>Descripción</h4>
             <textarea id="descripcionEvento" required rows="6" cols="80" style="resize: none;"></textarea><br/>
             <h4>Fecha inicio</h4>
-            <input id="fechainicio" required type="datetime-local" ><br/>
+            <input id="fechainicio" required type="datetime-local" value="" ><br/>
             <h4>Fecha fin</h4>
-            <input id="fechafin" required type="datetime-local"><br/>
+            <input id="fechafin" required type="datetime-local" value=""><br/>
             <h4>Dirección</h4>
             <input id="direccionEvento" required type="text" value="" /><br/>
             <h4>Latitud</h4>
@@ -35,10 +35,8 @@ and open the template in the editor.
             <select multiple class="form-control" id="selectTag">
                 
             </select><br/>
-            <button id="guardar" class="btn btn-success">Guardar</button>
-            <button id="cancelar" class="btn btn-success">Cancelar</button>
-            
-
+            <button id="guardar" class="btn btn-success" onclick="guardarEvento()">Guardar</button>
+            <button id="cancelar" class="btn btn-success" onclick="cancelar()">Cancelar</button>
         </div>
     </body>
 </html>
