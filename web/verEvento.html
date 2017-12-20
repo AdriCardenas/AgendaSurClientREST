@@ -54,8 +54,7 @@ and open the template in the editor.
                     </a>
                 </div> 
             </div>
-            
-            
+               
             <div class="row">
                 <div class="page-header"><h1 id="nombreEvento"></h1></div>
                 <div class="panel-group">
@@ -78,32 +77,6 @@ and open the template in the editor.
                     <div style="width:1000px; height:800px;">
                         <div id="map-canvas" style="width: 100%; height: 60%"></div>
                     </div>
-                    <!--
-                    <script>
-                        function initMap() {
-                            map = new google.maps.Map(document.getElementById('map-canvas'), {
-                                center: new google.maps.LatLng(latitud, longitud),
-                                zoom: 15,
-                                draggable: true
-                            });
-                            var marker = new google.maps.Marker({
-                                position: new google.maps.LatLng(latitud, longitud),
-                                map: map,
-                                animation: google.maps.Animation.DROP,
-                                title: nombreEvento
-                            });
-                            
-                            var infowindow = new google.maps.InfoWindow({
-                                content: nombreEvento
-                            });
-// Adding a click event to the marker
-                            google.maps.event.addListener(marker, 'click', function () {
-// Calling the open method of the infoWindow
-                                infowindow.open(map, marker);
-                            });
-                        }
-                    </script>
-                    -->
                 </div>
             </div>
         </div>

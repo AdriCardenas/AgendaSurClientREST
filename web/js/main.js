@@ -20,9 +20,12 @@ $(document).ready(function () {
     });
 
     addUser();
+    
+    
 
 // Retrieve wine list when application starts 
-    findAll();
+    
+    
 
 // Nothing to delete in initial application state
     $('#btnDelete').hide();
@@ -202,18 +205,7 @@ $(document).ready(function () {
     function renderListNoValidados(data) {
         var list = data == null ? [] : (data instanceof Array ? data : [data]);
 
-        $('#table tr').remove();
-        var cabecera = $('<tr></tr>');
-
-        cabecera.append('<th> Nombre </th>');
-        cabecera.append('<th> Descripcion  </th>');
-        cabecera.append('<th> Fecha de inicio </th>');
-        cabecera.append('<th> Fecha de fin </th>');
-        cabecera.append('<th> Ubicacion </th>');
-        cabecera.append('<th></th>');
-
-        $('#table').append(cabecera);
-
+        $('#tfoot tr').remove();
 
         $.each(list, function (index, event) {
             var row = $('<tr id=' + event.id + '></tr>');
@@ -282,27 +274,18 @@ $(document).ready(function () {
             cell.append(botonValidar);
 
             row.append(cell);
-            $('#table').append(row);
+            $('#example').append(row);
 
         });
+        
+        $('#example').DataTable();
     }
 
     function renderList(data) {
         // JAX-RS serializes an empty list as null, and a 'collection of one' as an object (not an 'array of one')
         var list = data == null ? [] : (data instanceof Array ? data : [data]);
 
-        $('#table tr').remove();
-        var cabecera = $('<tr></tr>');
-
-        cabecera.append('<th> Nombre </th>');
-        cabecera.append('<th> Descripcion  </th>');
-        cabecera.append('<th> Fecha de inicio </th>');
-        cabecera.append('<th> Fecha de fin </th>');
-        cabecera.append('<th> Ubicacion </th>');
-        cabecera.append('<th></th>');
-
-        $('#table').append(cabecera);
-
+        $('#tfoot tr').remove();
 
         $.each(list, function (index, event) {
             var row = $('<tr id=' + event.id + '></tr>');
@@ -351,12 +334,14 @@ $(document).ready(function () {
             cell.append(botonEliminar);
 
             row.append(cell);
-            $('#table').append(row);
+            $('#example').append(row);
 
             //$('#table').append('</tr>');
             //$('#table').append('<li><a href="#" data-identity="' +
             //   wine.id + '">'+wine.name+'</a></li>');
         });
+        
+        $('#example').DataTable();
     }
 
     function renderDetails(wine) {
@@ -422,7 +407,7 @@ $(document).ready(function () {
                 "email": email
             }),
             success: function (data, textStatus, jqXHR) {
-                alert('Usuario creado correctamente, señora.');
+                //alert('Usuario creado correctamente, señora.');
             }
         });
 

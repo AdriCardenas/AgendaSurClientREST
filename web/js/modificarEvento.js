@@ -100,7 +100,7 @@ $(document).ready(function () {
 
         if ($('#selectTag').val() == null) {
             return JSON.stringify({
-                creador: 'cardenitas96@gmail.com',
+                creador: localStorage.getItem('emailUsuario'),
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),
@@ -113,7 +113,7 @@ $(document).ready(function () {
             );
         } else {
             return JSON.stringify({
-                creador: 'cardenitas96@gmail.com',
+                creador: localStorage.getItem('emailUsuario'),
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),

@@ -5,7 +5,6 @@
  */
 var latitud, longitud, nombreEvento, tags;
 
-
 $(document).ready(function () {
     var retrievedObject = localStorage.getItem('evento');
     console.log('retrievedObject: ', JSON.parse(retrievedObject));
@@ -19,7 +18,6 @@ $(document).ready(function () {
     document.getElementById('fechaInicio').innerHTML = jsonEvento.fechainicio;
     document.getElementById('fechaFin').innerHTML = jsonEvento.fechafin;
     document.getElementById('direccionEvento').innerHTML = jsonEvento.direccion;
-
 
     tags = jsonEvento.tags;
     console.log(tags);
@@ -56,20 +54,16 @@ $(document).ready(function () {
         var infowindow = new google.maps.InfoWindow({
             content: nombreEvento
         });
-// Adding a click event to the marker
+        // Adding a click event to the marker
         google.maps.event.addListener(marker, 'click', function () {
-// Calling the open method of the infoWindow
+            // Calling the open method of the infoWindow
             infowindow.open(map, marker);
         });
-    }
-
-
-    ;
+    };
 
     function handleResponse() {
-
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-
+            
             var response = xhttp.responseText;
             var substring = "jsonFlickrApi";
             var idx = response.indexOf(substring);
@@ -99,21 +93,9 @@ $(document).ready(function () {
                 //document.body.appendChild(elem);
                 i++;
             }
-
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
+    
 });
 
 

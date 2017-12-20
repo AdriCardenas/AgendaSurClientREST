@@ -56,9 +56,9 @@ $(document).ready(function () {
     function formToJSON() {
         console.log($('#selectTag').val());
 
-        if ($('#selectTag').val() == null || $('#selectTag').val().isEmptyObject()) {
+        if ($('#selectTag').val() == null ) {
             return JSON.stringify({
-                creador: 'cardenitas96@gmail.com',
+                creador: localStorage.getItem('emailUsuario'),
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),
@@ -70,7 +70,7 @@ $(document).ready(function () {
             );
         } else {
             return JSON.stringify({
-                creador: 'cardenitas96@gmail.com',
+                creador: localStorage.getItem('emailUsuario'),
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),
