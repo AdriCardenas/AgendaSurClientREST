@@ -2,14 +2,39 @@
 
 var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
 
-var nombre = localStorage.getItem('nombreUsuario');
-var apellido = localStorage.getItem('apellidoUsuario');
-var email = localStorage.getItem('emailUsuario');
 
+var usuarioSesion = JSON.parse(localStorage.getItem('usuarioSesion'));
+var nombre = usuarioSesion.nombre;
+var apellidos = usuarioSesion.apellidos;
+var email = usuarioSesion.email;
+var tipoUsuario = usuarioSesion.tipoUsuario;
+var tagsUsuario = usuarioSesion.tagsUsuario;
+console.log(nombre + apellidos + email +tipoUsuario+tagsUsuario );
+//nota localStorate solo puede guardar tipos simples!!
 var latitud;
 var longitud;
 
+/*
+function setUsuarioSesion(data) {
+    
+    localStorage.setItem("usuarioSesion",JSON.stringify(data));
+    usuarioSesion = JSON.parse(localStorage.getItem("usuarioSesion"));
+    tipoUsuario = usuarioSesion.tipoUsuario;
+    console.log(tipoUsuario);
+}
+
+
+function compruebaTipoUsuario() {
+    var jsonUsuario = $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.usuario/' + email,
+        dataType: "json",
+        success: setUsuarioSesion
+    });
+}
+*/
 $(document).ready(function () {
+    //compruebaTipoUsuario();
     findAll();
     addUser();
     if (navigator.geolocation) {
@@ -17,24 +42,26 @@ $(document).ready(function () {
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
+
+    console.log(usuarioSesion);
 });
 
-function findEventos(){
+function findEventos() {
     window.location.replace("listadoEventos.html");
     return true;
 }
 
-function findEventosNoValidados(){
+function findEventosNoValidados() {
     window.location.replace("listadoNoValidados.html");
     return true;
 }
 
-function findEventosByTags(){
-    localStorage.setItem('tag',$('.inputRadio:checked').val());
+function findEventosByTags() {
+    localStorage.setItem('tag', $('.inputRadio:checked').val());
     window.location.replace("listadoTag.html");
 }
 
-function findEventosByLocation(){
+function findEventosByLocation() {
     window.location.replace("listadoGeolocation.html");
     return true;
 }
@@ -55,13 +82,13 @@ function findAllNoValidados() {
     });
 }
 
-function error(data){
+function error(data) {
     console.log(data);
 }
 
-function goToAdmin (){
-   window.location = "listadoUsuarios.html";
-   return true;
+function goToAdmin() {
+    window.location = "listadoUsuarios.html";
+    return true;
 }
 
 
@@ -96,13 +123,13 @@ $('#btnDelete').click(function () {
 
 $('#wineList a').live('click', function () {
     findById($(this).data('identity'));
-}); 
+});
 
 // Replace broken images with generic wine bottle
- $("img").error(function () {
+$("img").error(function () {
     $(this).attr("src", "pics/generic.jpg");
 
-}); 
+});
 
 
 //$("#datepicker").datepicker();
@@ -201,7 +228,7 @@ function renderListNoValidados(data) {
     var list = data == null ? [] : (data instanceof Array ? data : [data]);
 
     $('#tfoot tr').remove();
-    
+
     console.log(list[0])
 
     $.each(list, function (index, event) {
@@ -216,7 +243,7 @@ function renderListNoValidados(data) {
         buttonVer.className = 'btn btn-success';
         buttonVer.innerHTML = "<span class='glyphicon glyphicon-eye-open'></span>";
         buttonVer.id = 'btn_refresh' + event.id;
-        buttonVer.onclick = function(){
+        buttonVer.onclick = function () {
             localStorage.setItem("evento", JSON.stringify(event));
             console.log(event);
             //.then(function (response) {
@@ -227,7 +254,7 @@ function renderListNoValidados(data) {
         buttonModificar.className = 'btn btn-warning';
         buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
         buttonModificar.id = 'btn_modificar' + event.id;
-        buttonModificar.onclick = function(){
+        buttonModificar.onclick = function () {
             localStorage.setItem("evento", JSON.stringify(event));
             console.log(event);
             window.location = "modificarEvento.html";
@@ -236,7 +263,7 @@ function renderListNoValidados(data) {
         var buttonEliminar = document.createElement("button");
         buttonEliminar.className = 'btn btn-danger';
         buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
-        buttonEliminar.onclick = function(){
+        buttonEliminar.onclick = function () {
             deleteEvent(event.id);
             $(this).closest('tr').remove();
         };
@@ -244,18 +271,18 @@ function renderListNoValidados(data) {
         var buttonValidar = document.createElement("button");
         buttonValidar.className = 'btn btn-info';
         buttonValidar.innerHTML = "<span class='glyphicon glyphicon-check'></span>";
-        buttonValidar.onclick = function(){
+        buttonValidar.onclick = function () {
             $(this).closest('tr').remove();
-                $.ajax({
-                    type: 'PUT',
-                    url: rootURL + '/validar/' + event.id,
-                    success: function (data, textStatus, jqXHR) {
-                        console.log("Evento validados");
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        alert('ERROR: ¡Ups!, ha habido un error al validar un evento');
-                    }
-                });
+            $.ajax({
+                type: 'PUT',
+                url: rootURL + '/validar/' + event.id,
+                success: function (data, textStatus, jqXHR) {
+                    console.log("Evento validados");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('ERROR: ¡Ups!, ha habido un error al validar un evento');
+                }
+            });
         };
 
         row.append('<td>' + event.nombre + '</td>');
@@ -282,22 +309,22 @@ function renderListNoValidados(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": false
-        }],
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": false
+            }],
         destroy: true,
         searching: true,
         pagination: true
-        //destroy: true
+                //destroy: true
     });
 }
 
@@ -318,7 +345,7 @@ function renderList(data) {
         buttonVer.className = 'btn btn-success';
         buttonVer.innerHTML = "<span class='glyphicon glyphicon-eye-open'></span>";
         buttonVer.id = 'btn_refresh' + event.id;
-        buttonVer.onclick = function(){
+        buttonVer.onclick = function () {
             localStorage.setItem("evento", JSON.stringify(event));
             console.log(event);
             //.then(function (response) {
@@ -329,7 +356,7 @@ function renderList(data) {
         buttonModificar.className = 'btn btn-warning';
         buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
         buttonModificar.id = 'btn_modificar' + event.id;
-        buttonModificar.onclick = function(){
+        buttonModificar.onclick = function () {
             localStorage.setItem("evento", JSON.stringify(event));
             console.log(event);
             window.location = "modificarEvento.html";
@@ -338,7 +365,7 @@ function renderList(data) {
         var buttonEliminar = document.createElement("button");
         buttonEliminar.className = 'btn btn-danger';
         buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
-        buttonEliminar.onclick = function(){
+        buttonEliminar.onclick = function () {
             deleteEvent(event.id);
             $(this).closest('tr').remove();
         };
@@ -369,18 +396,18 @@ function renderList(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": true
-        }, {
-            "orderable": false
-        }],
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": true
+            }, {
+                "orderable": false
+            }],
         destroy: true,
         searching: true,
         pagination: true
@@ -437,7 +464,7 @@ function mostrarDatos(data) {
 
 function addUser() {
     console.log(nombre);
-    console.log(apellido);
+    console.log(apellidos);
     console.log(email);
     $.ajax({
         type: 'POST',
@@ -446,7 +473,7 @@ function addUser() {
         dataType: "json",
         data: JSON.stringify({
             "nombre": nombre,
-            "apellidos": apellido,
+            "apellidos": apellidos,
             "email": email
         }),
         success: function (data, textStatus, jqXHR) {

@@ -60,12 +60,25 @@ function makeApiCall() {
         var apellido = response.result.names[0].familyName;
         var email = response.result.emailAddresses[0].value;
         //alert('Hola, ' + response.result.names[0].givenName);
-        localStorage.setItem("nombreUsuario", nombre);
-        localStorage.setItem("apellidoUsuario", apellido);
-        localStorage.setItem("emailUsuario", email);
+
+        var jsonUsuario = $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.usuario/' + email,
+            dataType: "json",
+            success: setUsuarioSesion
+        });
+
+
+        //comprobamos tipo usuario
+
 
         window.location = "listadoEventos.html";
     }, function (reason) {
         console.log('Error: ' + reason.result.error.message);
     });
+}
+
+function setUsuarioSesion(data) {   
+    localStorage.setItem("usuarioSesion",JSON.stringify(data));
+
 }
