@@ -2,15 +2,24 @@
 
 var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento";
 
-var nombre = localStorage.getItem('nombreUsuario');
-var apellido = localStorage.getItem('apellidoUsuario');
-var email = localStorage.getItem('emailUsuario');
+var usuarioSesion = JSON.parse(localStorage.getItem('usuarioSesion'));
+var nombre = usuarioSesion.nombre;
+var apellidos = usuarioSesion.apellidos;
+var email = usuarioSesion.email;
+var tipoUsuario = usuarioSesion.tipoUsuario;
+var tagsUsuario = usuarioSesion.tagsUsuario;
+console.log(nombre + apellidos + email +tipoUsuario+tagsUsuario );
 var tag = localStorage.getItem('tag');
 
 var latitud;
 var longitud;
 
 $(document).ready(function () {
+     if(!esAdmin()){
+        $("#btnAdminUsuarios").hide();
+    }else{
+        $("#btnAdminUsuarios").show();
+    }
     findAllByTag();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -18,6 +27,10 @@ $(document).ready(function () {
         console.log("Geolocation is not supported by this browser.");
     }
 });
+
+function esAdmin(){
+    return tipoUsuario == 3;
+}
 
 function findEventos() {
     window.location.replace("listadoEventos.html");
