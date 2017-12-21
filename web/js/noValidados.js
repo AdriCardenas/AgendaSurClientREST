@@ -19,6 +19,11 @@ $(document).ready(function () {
     }
 });
 
+function findEventosByTags(){
+    localStorage.setItem('tag',$('.inputRadio:checked').val());
+    window.location.replace("listadoTag.html");
+}
+
 function findEventos(){
     window.location.replace("listadoEventos.html");
     return true;
