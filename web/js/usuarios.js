@@ -69,9 +69,9 @@ function renderList(data) {
         buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
         buttonModificar.id = 'btn_modificar' + usuario.email;
         buttonModificar.onclick = function(){
-            /*localStorage.setItem("evento", JSON.stringify(event));
-            console.log(event);
-            window.location = "modificarEvento.html";*/
+            localStorage.setItem("usuario", JSON.stringify(usuario));
+            console.log(usuario);
+            window.location = "modificarUsuario.html";
         };
 
         var buttonEliminar = document.createElement("button");

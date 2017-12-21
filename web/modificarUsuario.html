@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Modificar Usuario</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script src="js/jquery-1.7.1.min.js"></script>
+        <script src="js/modificarUsuario.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <h4>Email</h4>
+            <input id="email" required type="text" value="" /><br/>
+            <h4>Nombre</h4>
+            <input id="nombre" required type="text" value=""/><br/>
+            <h4>Apellidos</h4>
+            <input id="apellidos" required type="text" value=""><br/>
+            <h4>Tipo</h4>
+            <input id="tipoUsuario" required type="text" value="" /><br/>
+            <h4>Tags</h4>           
+            <select multiple class="form-control" id="selectTag">
+            </select><br/>
+            <button id="guardar" class="btn btn-success" onclick="guardarUsuario()">Guardar</button>
+            <button id="cancelar" class="btn btn-success" onclick="cancelar()">Cancelar</button>
+        </div>
+    </body>
+</html>
