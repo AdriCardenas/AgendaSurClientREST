@@ -29,6 +29,11 @@ function findEventosNoValidados(){
     return true;
 }
 
+function findEventosByTags(){
+    localStorage.setItem('tag',$('.inputRadio:checked').val());
+    window.location.replace("listadoTag.html");
+}
+
 function findEventosByLocation(){
     window.location.replace("listadoGeolocation.html");
     return true;

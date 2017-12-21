@@ -29,6 +29,11 @@ function findEventosNoValidados(){
     return true;
 }
 
+function findEventosByTags(){
+    localStorage.setItem('tag',$('.inputRadio:checked').val());
+    window.location.replace("listadoTag.html");
+}
+
 function crearEvento() {
     window.location.replace("crearEvento.html");
     return true;
@@ -58,6 +63,11 @@ function goToAdmin (){
 function showPosition(position) {
     latitud = position.coords.latitude;
     longitud = position.coords.longitude;
+}
+
+function findEventosByLocation(){
+    window.location.replace("listadoGeolocation.html");
+    return true;
 }
 
 function findAllByGeolocalization() {
