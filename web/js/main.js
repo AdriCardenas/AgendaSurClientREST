@@ -61,6 +61,11 @@ function findEventosByTags() {
     window.location.replace("listadoTag.html");
 }
 
+function goToElegirTags(){
+    window.location.replace("elegirTags.html");
+    return true;
+}
+
 function findEventosByLocation() {
     window.location.replace("listadoGeolocation.html");
     return true;
@@ -106,40 +111,6 @@ function findAllByGeolocalization() {
         dataType: "json", // data type of response
         success: renderList
     });
-}
-
-$('#btnSave').click(function () {
-    if ($('#wineId').val() == '')
-        addWine();
-    else
-        updateWine();
-    return false;
-});
-
-$('#btnDelete').click(function () {
-    deleteWine();
-    return false;
-});
-
-$('#wineList a').live('click', function () {
-    findById($(this).data('identity'));
-});
-
-// Replace broken images with generic wine bottle
-$("img").error(function () {
-    $(this).attr("src", "pics/generic.jpg");
-
-});
-
-
-//$("#datepicker").datepicker();
-
-
-function search(searchKey) {
-    if (searchKey == '')
-        findAll();
-    else
-        findByName(searchKey);
 }
 
 function findAll() {
