@@ -34,7 +34,12 @@ function compruebaTipoUsuario() {
 }
 */
 $(document).ready(function () {
-    //compruebaTipoUsuario();
+     if(!esAdmin()){
+        $("#btnAdminUsuarios").hide();
+    }else{
+        $("#btnAdminUsuarios").show();
+    }
+  
     findAll();
     addUser();
     if (navigator.geolocation) {
@@ -42,9 +47,14 @@ $(document).ready(function () {
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
+    
 
     console.log(usuarioSesion);
 });
+
+function esAdmin(){
+    return tipoUsuario == 3;
+}
 
 function findEventos() {
     window.location.replace("listadoEventos.html");
@@ -489,4 +499,7 @@ function handleSignOutClick() {
     //gapi.auth2.getAuthInstance().disconnect();
     window.location = "index.html";
 }
+
+
+
 
