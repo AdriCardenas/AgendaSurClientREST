@@ -164,8 +164,14 @@ function mostrarComentarios(data) {
     
     $('#div-comentarios p').remove();
     $.each(list, function (index, comentario) {
-        var parrafo = $('<p>' + comentario.comentario + '</p>');
-        $('#div-comentarios').append(parrafo);
+        var well = $('<div class="well"></div>');
+        var autor = $('<p>' + comentario.nombreCreador + ' ' + comentario.apellidosCreador + '</p>');
+        var fecha = $('<p>' + comentario.fecha + '</p>');
+        var textoComentario = $('<p>' + comentario.comentario + '</p>');
+        well.append(autor);
+        well.append(fecha);
+        well.append(textoComentario);
+        $('#div-comentarios').append(well);
     });
 }
 
