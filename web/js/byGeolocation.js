@@ -10,7 +10,7 @@ var latitud;
 var longitud;
 
 $(document).ready(function () {
-    findAll();
+    findAllByGeolocalization();
     addUser();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -26,11 +26,6 @@ function findEventos(){
 
 function findEventosNoValidados(){
     window.location.replace("listadoNoValidados.html");
-    return true;
-}
-
-function findEventosByLocation(){
-    window.location.replace("listadoGeolocation.html");
     return true;
 }
 
@@ -277,7 +272,7 @@ function renderListNoValidados(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
+            "orderable": false
         }, {
             "orderable": true
         }, {
@@ -364,7 +359,7 @@ function renderList(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
+            "orderable": false
         }, {
             "orderable": true
         }, {

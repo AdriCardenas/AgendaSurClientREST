@@ -10,7 +10,7 @@ var latitud;
 var longitud;
 
 $(document).ready(function () {
-    findAll();
+    findAllNoValidados();
     addUser();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -196,8 +196,6 @@ function renderListNoValidados(data) {
     var list = data == null ? [] : (data instanceof Array ? data : [data]);
 
     $('#tfoot tr').remove();
-    
-    console.log(list[0])
 
     $.each(list, function (index, event) {
         var row = $('<tr id=' + event.id + '></tr>');
@@ -277,7 +275,7 @@ function renderListNoValidados(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
+            "orderable": false
         }, {
             "orderable": true
         }, {
@@ -364,7 +362,7 @@ function renderList(data) {
     //$('#example').DataTable();
     $('#example').DataTable({
         "columns": [{
-            "orderable": true
+            "orderable": false
         }, {
             "orderable": true
         }, {
