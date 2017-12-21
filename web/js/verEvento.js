@@ -5,38 +5,46 @@
  */
 var latitud, longitud, nombreEvento, tags;
 var retrievedObject = localStorage.getItem('evento');
-    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
-    var jsonEvento = JSON.parse(retrievedObject);
+var jsonEvento = JSON.parse(retrievedObject);
 
-    nombreEvento = jsonEvento.nombre;
+nombreEvento = jsonEvento.nombre;
 
-    tags = jsonEvento.tags;
-    console.log(tags);
+tags = jsonEvento.tags;
+console.log(tags);
 
-    latitud = parseFloat(jsonEvento.latitud);
-    longitud = parseFloat(jsonEvento.longitud);
+latitud = parseFloat(jsonEvento.latitud);
+longitud = parseFloat(jsonEvento.longitud);
 
-    var xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = handleResponse;
-    //var lugar = document.getElementById("lugarid").value;
-    var API_KEY = "ce467785e4e6b7dc282e86e0f2268c26";
-    var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search" +
-            "&format=json&api_key=" + API_KEY + "&tags=" + tags;
-    console.log(url);
-    xhttp.open("GET", url, true);
-    xhttp.send(null);
+var xhttp;
+xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = handleResponse;
+//var lugar = document.getElementById("lugarid").value;
+var API_KEY = "ce467785e4e6b7dc282e86e0f2268c26";
+var url = "https://api.flickr.com/services/rest/?method=flickr.photos.search" +
+        "&format=json&api_key=" + API_KEY + "&tags=" + tags;
+console.log(url);
+xhttp.open("GET", url, true);
+xhttp.send(null);
 
 $(document).ready(function () {
-    
+
     document.getElementById('nombreEvento').innerHTML = nombreEvento;
     document.getElementById('descripcionEvento').innerHTML = jsonEvento.descripcion;
     document.getElementById('fechaInicio').innerHTML = jsonEvento.fechainicio;
     document.getElementById('fechaFin').innerHTML = jsonEvento.fechafin;
     document.getElementById('direccionEvento').innerHTML = jsonEvento.direccion;
-    
+
     buscarComentariosDeEvento();
+
+    $('#botonEnviarComentario').click(function () {
+        enviarComentario();
+    });
+
+    $('#botonMeGusta').click(function () {
+        enviarMeGusta();
+    });
 
     initMap();
 
@@ -63,7 +71,8 @@ function initMap() {
         // Calling the open method of the infoWindow
         infowindow.open(map, marker);
     });
-};
+}
+;
 
 function handleResponse() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -99,7 +108,47 @@ function handleResponse() {
         }
     }
 }
-    
+
+function enviarComentario() {
+    console.log('Envio comentario');
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.comentario',
+        contentType: 'application/json',
+        dataType: "json", // data type of response
+        data: textareaToJSON(),
+        success: function (response) {
+            buscarComentariosDeEvento();
+            $('#comentarioTextarea').val('');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert('Usted ya ha escrito una valoración.');
+        }
+    });
+}
+
+function textareaToJSON() {
+    var date = new Date();
+    return JSON.stringify({
+        "apellidosCreador": localStorage.getItem('apellidoUsuario'),
+        "comentario": $('#comentarioTextarea').val(),
+        "comentarioPK": {
+            "eventoId": jsonEvento.id,
+            "usuarioEmail": localStorage.getItem('emailUsuario')
+        },
+        "fecha": dateParser(date),
+        "nombreCreador": localStorage.getItem('nombreUsuario')
+    });
+}
+
+function dateParser(date) {
+    var day = date.getDate();
+    var month = date.getMonth();
+    var year = date.getFullYear();
+    var time = date.toLocaleTimeString();
+    return year + '-' + month + '-' + day + ' ' + time;
+}
+
 function buscarComentariosDeEvento() {
     $.ajax({
         type: 'GET',
@@ -110,11 +159,27 @@ function buscarComentariosDeEvento() {
     });
 }
 
-function mostrarComentarios(data){
+function mostrarComentarios(data) {
     var list = data == null ? [] : (data instanceof Array ? data : [data]);
-
+    
+    $('#div-comentarios p').remove();
     $.each(list, function (index, comentario) {
         var parrafo = $('<p>' + comentario.comentario + '</p>');
         $('#div-comentarios').append(parrafo);
+    });
+}
+
+function enviarMeGusta() {
+    console.log('Envio me gusta');
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.evento' +
+                '/' + jsonEvento.id + '/' + localStorage.getItem('emailUsuario'),
+        contentType: 'application/json',
+        dataType: "json", // data type of response
+        //data: textareaToJSON(),
+        success: function (response) {
+            alert('Ha dado un me gusta a este evento.');
+        }
     });
 }
