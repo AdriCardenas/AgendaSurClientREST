@@ -14,8 +14,10 @@ jsonEvento = JSON.parse(retrievedObject);
 
     document.getElementById('nombreEvento').value = jsonEvento.nombre;
     document.getElementById('descripcionEvento').value = jsonEvento.descripcion;
-    document.getElementById('fechainicio').value = jsonEvento.fechainicio;
-    document.getElementById('fechafin').value = jsonEvento.fechafin;
+    var fi = jsonEvento.fechainicio.replace(" ","T");
+    document.getElementById('fechainicio').value = fi;
+    var ff = jsonEvento.fechafin.replace(" ","T");
+    document.getElementById('fechafin').value = ff;
     document.getElementById('direccionEvento').value = jsonEvento.direccion;
     document.getElementById('latitudEvento').value = jsonEvento.latitud;
     document.getElementById('longitudEvento').value = jsonEvento.longitud;
