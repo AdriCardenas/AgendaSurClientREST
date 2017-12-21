@@ -39,11 +39,23 @@ and open the template in the editor.
                 <h1>Eventos</h1>
             </div>
             <div class="header" style="padding-bottom: 1em">
-                <button id="btnAdd" class="btn btn-info" onclick="crearEvento()">Nuevo evento</button>
-                <button id="btnGeo" class="btn btn-info" onclick="findEventos()">Buscar eventos</button>
+                <button id="btnAdd" class="btn btn-success" onclick="crearEvento()">Nuevo evento</button>
+                <button id="btnGeo" class="btn btn-primary" onclick="findEventos()">Mostrar todos</button>
                 <button id="btnNoValidados" class="btn btn-info" onclick="findEventosNoValidados()">Buscar no validados</button>
                 <button id="btnAdminUsuarios" class="btn btn-info" onclick="goToAdmin()">Administracion de usuarios</button>
                 <button id="btnLogout" class="btn btn-danger" onclick="handleSignOutClick()">Log out</button>
+                <br/><br/>
+                <button id="btnTags" class="btn btn-info" onclick="findEventosByTags()">Buscar por tag</button>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Adult">Adult</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Culture">Culture</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Drink">Drink</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Fitness">Fitness</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Food">Food</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Music">Music</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Sport">Sport</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Student">Student</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Technology">Technology</label>
+                <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Tours">Tours</label>
             </div>
             <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>

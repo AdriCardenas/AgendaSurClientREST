@@ -21,9 +21,11 @@ jsonEvento = JSON.parse(retrievedObject);
     document.getElementById('direccionEvento').value = jsonEvento.direccion;
     document.getElementById('latitudEvento').value = jsonEvento.latitud;
     document.getElementById('longitudEvento').value = jsonEvento.longitud;
+    
+    listTagEvento = jsonEvento.tags;
 
     findAllTag();
-    findAllTagEvento();
+    //findAllTagEvento();
 
 });
 

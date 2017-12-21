@@ -34,6 +34,11 @@ function findEventosByTags(){
     window.location.replace("listadoTag.html");
 }
 
+function findEventosByLocation(){
+    window.location.replace("listadoGeolocation.html");
+    return true;
+}
+
 function crearEvento() {
     window.location.replace("crearEvento.html");
     return true;
