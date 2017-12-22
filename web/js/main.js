@@ -36,8 +36,10 @@ var longitud;
 $(document).ready(function () {
     if (!esAdmin()) {
         $("#btnAdminUsuarios").hide();
+        $("#btnNoValidados").hide();
     } else {
         $("#btnAdminUsuarios").show();
+        $("#btnNoValidados").show();
     }
 
     findAll();
@@ -133,67 +135,6 @@ function findAll() {
     });
 }
 
-function findByName(searchKey) {
-    console.log('findByName: ' + searchKey);
-    $.ajax({
-        type: 'GET',
-        url: rootURL + '/search/' + searchKey,
-        dataType: "json",
-        success: renderList
-    });
-}
-
-function findById(id) {
-    console.log('findById: ' + id);
-    $.ajax({
-        type: 'GET',
-        url: rootURL + '/' + id,
-        dataType: "json",
-        success: function (data) {
-            $('#btnDelete').show();
-            console.log('findById success: ' + data.name);
-            currentWine = data;
-            renderDetails(currentWine);
-        }
-    });
-}
-
-function addWine() {
-    console.log('addWine');
-    $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        url: rootURL,
-        dataType: "json",
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
-            alert('Wine created successfully');
-            $('#btnDelete').show();
-            $('#wineId').val(data.id);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('addWine error: ' + textStatus);
-        }
-    });
-}
-
-function updateWine() {
-    console.log('updateWine');
-    $.ajax({
-        type: 'PUT',
-        contentType: 'application/json',
-        url: rootURL + '/' + $('#wineId').val(),
-        dataType: "json",
-        data: formToJSON(),
-        success: function (data, textStatus, jqXHR) {
-            alert('Wine updated successfully');
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert('updateWine error: ' + textStatus);
-        }
-    });
-}
-
 function deleteEvent(id) {
     console.log('deleteEvent');
     $.ajax({
@@ -202,110 +143,6 @@ function deleteEvent(id) {
         error: function (jqXHR, textStatus, errorThrown) {
             alert('ERROR: ¡Ups!, ha habido un error al eliminar un evento');
         }
-    });
-}
-
-function renderListNoValidados(data) {
-    var list = data == null ? [] : (data instanceof Array ? data : [data]);
-
-    $('#tfoot tr').remove();
-
-    console.log(list[0])
-
-    $.each(list, function (index, event) {
-        var row = $('<tr id=' + event.id + '></tr>');
-        var cell = $('<td></td>');
-        var col1 = $('<div class="col-md-3"></div>');
-        var col2 = $('<div class="col-md-3"></div>');
-        var col3 = $('<div class="col-md-3"></div>');
-        var col4 = $('<div class="col-md-3"></div>');
-
-        var buttonVer = document.createElement("button");
-        buttonVer.className = 'btn btn-success';
-        buttonVer.innerHTML = "<span class='glyphicon glyphicon-eye-open'></span>";
-        buttonVer.id = 'btn_refresh' + event.id;
-        buttonVer.onclick = function () {
-            localStorage.setItem("evento", JSON.stringify(event));
-            console.log(event);
-            //.then(function (response) {
-            window.location = "verEvento.html";
-        };
-
-        var buttonModificar = document.createElement("button");
-        buttonModificar.className = 'btn btn-warning';
-        buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
-        buttonModificar.id = 'btn_modificar' + event.id;
-        buttonModificar.onclick = function () {
-            localStorage.setItem("evento", JSON.stringify(event));
-            console.log(event);
-            window.location = "modificarEvento.html";
-        };
-
-        var buttonEliminar = document.createElement("button");
-        buttonEliminar.className = 'btn btn-danger';
-        buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
-        buttonEliminar.onclick = function () {
-            deleteEvent(event.id);
-            $(this).closest('tr').remove();
-        };
-
-        var buttonValidar = document.createElement("button");
-        buttonValidar.className = 'btn btn-info';
-        buttonValidar.innerHTML = "<span class='glyphicon glyphicon-check'></span>";
-        buttonValidar.onclick = function () {
-            $(this).closest('tr').remove();
-            $.ajax({
-                type: 'PUT',
-                url: rootURL + '/validar/' + event.id,
-                success: function (data, textStatus, jqXHR) {
-                    console.log("Evento validados");
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    alert('ERROR: ¡Ups!, ha habido un error al validar un evento');
-                }
-            });
-        };
-
-        row.append('<td>' + event.nombre + '</td>');
-        row.append('<td>' + event.descripcion + '</td>');
-        row.append('<td>' + event.fechainicio + '</td>');
-        row.append('<td>' + event.fechafin + '</td>');
-        row.append('<td>' + event.direccion + '</td>');
-
-        col1.append(buttonVer);
-        col2.append(buttonModificar);
-        col3.append(buttonEliminar);
-        col4.append(buttonValidar);
-
-        cell.append(col1);
-        cell.append(col2);
-        cell.append(col3);
-        cell.append(col4);
-
-        row.append(cell);
-        $('#example').append(row);
-
-    });
-
-    //$('#example').DataTable();
-    $('#example').DataTable({
-        "columns": [{
-                "orderable": true
-            }, {
-                "orderable": true
-            }, {
-                "orderable": true
-            }, {
-                "orderable": true
-            }, {
-                "orderable": true
-            }, {
-                "orderable": false
-            }],
-        destroy: true,
-        searching: true,
-        pagination: true
-                //destroy: true
     });
 }
 

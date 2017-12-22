@@ -8,17 +8,19 @@ var apellidos = usuarioSesion.apellidos;
 var email = usuarioSesion.email;
 var tipoUsuario = usuarioSesion.tipoUsuario;
 var tagsUsuario = usuarioSesion.tagsUsuario;
-console.log(nombre + apellidos + email +tipoUsuario+tagsUsuario );
+console.log(nombre + apellidos + email + tipoUsuario + tagsUsuario);
 var tag = localStorage.getItem('tag');
 
 var latitud;
 var longitud;
 
 $(document).ready(function () {
-     if(!esAdmin()){
+    if (!esAdmin()) {
         $("#btnAdminUsuarios").hide();
-    }else{
+        $("#btnNoValidados").hide();
+    } else {
         $("#btnAdminUsuarios").show();
+        $("#btnNoValidados").show();
     }
     findAllByTag();
     if (navigator.geolocation) {
@@ -28,7 +30,7 @@ $(document).ready(function () {
     }
 });
 
-function esAdmin(){
+function esAdmin() {
     return tipoUsuario == 3;
 }
 
@@ -42,12 +44,12 @@ function findEventosNoValidados() {
     return true;
 }
 
-function findEventosByTags(){
-    localStorage.setItem('tag',$('.inputRadio:checked').val());
+function findEventosByTags() {
+    localStorage.setItem('tag', $('.inputRadio:checked').val());
     window.location.replace("listadoTag.html");
 }
 
-function findEventosByLocation(){
+function findEventosByLocation() {
     window.location.replace("listadoGeolocation.html");
     return true;
 }
@@ -117,23 +119,7 @@ function renderList(data) {
             window.location = "verEvento.html";
         };
 
-        var buttonModificar = document.createElement("button");
-        buttonModificar.className = 'btn btn-warning';
-        buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
-        buttonModificar.id = 'btn_modificar' + event.id;
-        buttonModificar.onclick = function () {
-            localStorage.setItem("evento", JSON.stringify(event));
-            console.log(event);
-            window.location = "modificarEvento.html";
-        };
 
-        var buttonEliminar = document.createElement("button");
-        buttonEliminar.className = 'btn btn-danger';
-        buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
-        buttonEliminar.onclick = function () {
-            deleteEvent(event.id);
-            $(this).closest('tr').remove();
-        };
 
         row.append('<td>' + event.nombre + '</td>');
         row.append('<td>' + event.descripcion + '</td>');
@@ -143,12 +129,32 @@ function renderList(data) {
 
 
         col1.append(buttonVer);
-        col2.append(buttonModificar);
-        col3.append(buttonEliminar);
-
         cell.append(col1);
-        cell.append(col2);
-        cell.append(col3);
+        
+        if (esAdmin()) {
+            var buttonModificar = document.createElement("button");
+            buttonModificar.className = 'btn btn-warning';
+            buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
+            buttonModificar.id = 'btn_modificar' + event.id;
+            buttonModificar.onclick = function () {
+                localStorage.setItem("evento", JSON.stringify(event));
+                console.log(event);
+                window.location = "modificarEvento.html";
+            };
+
+            var buttonEliminar = document.createElement("button");
+            buttonEliminar.className = 'btn btn-danger';
+            buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
+            buttonEliminar.onclick = function () {
+                deleteEvent(event.id);
+                $(this).closest('tr').remove();
+            };
+            col2.append(buttonModificar);
+            col3.append(buttonEliminar);
+
+            cell.append(col2);
+            cell.append(col3);
+        }
 
         row.append(cell);
         $('#example').append(row);
