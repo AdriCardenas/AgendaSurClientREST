@@ -9,37 +9,37 @@ var apellidos = usuarioSesion.apellidos;
 var email = usuarioSesion.email;
 var tipoUsuario = usuarioSesion.tipoUsuario;
 var tagsUsuario = usuarioSesion.tagsUsuario;
-console.log(nombre + apellidos + email +tipoUsuario+tagsUsuario );
+console.log(nombre + apellidos + email + tipoUsuario + tagsUsuario);
 //nota localStorate solo puede guardar tipos simples!!
 var latitud;
 var longitud;
 
 /*
-function setUsuarioSesion(data) {
-    
-    localStorage.setItem("usuarioSesion",JSON.stringify(data));
-    usuarioSesion = JSON.parse(localStorage.getItem("usuarioSesion"));
-    tipoUsuario = usuarioSesion.tipoUsuario;
-    console.log(tipoUsuario);
-}
-
-
-function compruebaTipoUsuario() {
-    var jsonUsuario = $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.usuario/' + email,
-        dataType: "json",
-        success: setUsuarioSesion
-    });
-}
-*/
+ function setUsuarioSesion(data) {
+ 
+ localStorage.setItem("usuarioSesion",JSON.stringify(data));
+ usuarioSesion = JSON.parse(localStorage.getItem("usuarioSesion"));
+ tipoUsuario = usuarioSesion.tipoUsuario;
+ console.log(tipoUsuario);
+ }
+ 
+ 
+ function compruebaTipoUsuario() {
+ var jsonUsuario = $.ajax({
+ type: 'GET',
+ url: 'http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.usuario/' + email,
+ dataType: "json",
+ success: setUsuarioSesion
+ });
+ }
+ */
 $(document).ready(function () {
-     if(!esAdmin()){
+    if (!esAdmin()) {
         $("#btnAdminUsuarios").hide();
-    }else{
+    } else {
         $("#btnAdminUsuarios").show();
     }
-  
+
     findAll();
     addUser();
     if (navigator.geolocation) {
@@ -47,12 +47,12 @@ $(document).ready(function () {
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
-    
+
 
     console.log(usuarioSesion);
 });
 
-function esAdmin(){
+function esAdmin() {
     return tipoUsuario == 3;
 }
 
@@ -71,7 +71,7 @@ function findEventosByTags() {
     window.location.replace("listadoTag.html");
 }
 
-function goToElegirTags(){
+function goToElegirTags() {
     window.location.replace("elegirTags.html");
     return true;
 }
@@ -333,39 +333,39 @@ function renderList(data) {
             window.location = "verEvento.html";
         };
 
-        var buttonModificar = document.createElement("button");
-        buttonModificar.className = 'btn btn-warning';
-        buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
-        buttonModificar.id = 'btn_modificar' + event.id;
-        buttonModificar.onclick = function () {
-            localStorage.setItem("evento", JSON.stringify(event));
-            console.log(event);
-            window.location = "modificarEvento.html";
-        };
-
-        var buttonEliminar = document.createElement("button");
-        buttonEliminar.className = 'btn btn-danger';
-        buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
-        buttonEliminar.onclick = function () {
-            deleteEvent(event.id);
-            $(this).closest('tr').remove();
-        };
-
         row.append('<td>' + event.nombre + '</td>');
         row.append('<td>' + event.descripcion + '</td>');
         row.append('<td>' + event.fechainicio + '</td>');
         row.append('<td>' + event.fechafin + '</td>');
         row.append('<td>' + event.direccion + '</td>');
 
-
         col1.append(buttonVer);
-        col2.append(buttonModificar);
-        col3.append(buttonEliminar);
-
         cell.append(col1);
-        cell.append(col2);
-        cell.append(col3);
+        
+        if (esAdmin()) {
+            var buttonModificar = document.createElement("button");
+            buttonModificar.className = 'btn btn-warning';
+            buttonModificar.innerHTML = "<span class='glyphicon glyphicon-pencil'></span>";
+            buttonModificar.id = 'btn_modificar' + event.id;
+            buttonModificar.onclick = function () {
+                localStorage.setItem("evento", JSON.stringify(event));
+                console.log(event);
+                window.location = "modificarEvento.html";
+            };
 
+            var buttonEliminar = document.createElement("button");
+            buttonEliminar.className = 'btn btn-danger';
+            buttonEliminar.innerHTML = "<span class='glyphicon glyphicon-remove'></span>";
+            buttonEliminar.onclick = function () {
+                deleteEvent(event.id);
+                $(this).closest('tr').remove();
+            };
+            col2.append(buttonModificar);
+            col3.append(buttonEliminar);
+            cell.append(col2);
+            cell.append(col3);
+        }
+        
         row.append(cell);
         $('#example').append(row);
 
