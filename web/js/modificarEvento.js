@@ -3,33 +3,35 @@ var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.
 
 var jsonEvento;
 
-var listTagEvento;
+var listTagEvento = new Array();
 
 $(document).ready(function () {
-    
-var retrievedObject = localStorage.getItem('evento');
-console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
-jsonEvento = JSON.parse(retrievedObject);
+    var retrievedObject = localStorage.getItem('evento');
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+    jsonEvento = JSON.parse(retrievedObject);
 
     document.getElementById('nombreEvento').value = jsonEvento.nombre;
     document.getElementById('descripcionEvento').value = jsonEvento.descripcion;
-    var fi = jsonEvento.fechainicio.replace(" ","T");
+    var fi = jsonEvento.fechainicio.replace(" ", "T");
     document.getElementById('fechainicio').value = fi;
-    var ff = jsonEvento.fechafin.replace(" ","T");
+    var ff = jsonEvento.fechafin.replace(" ", "T");
     document.getElementById('fechafin').value = ff;
     document.getElementById('direccionEvento').value = jsonEvento.direccion;
     document.getElementById('latitudEvento').value = jsonEvento.latitud;
     document.getElementById('longitudEvento').value = jsonEvento.longitud;
-    
+
     listTagEvento = jsonEvento.tags;
 
     findAllTag();
     //findAllTagEvento();
 
+    mostrarChecked();
+
 });
 
-function cancelar(){
+function cancelar() {
     window.location = "listadoEventos.html";
     return false;
 }
@@ -79,12 +81,12 @@ function mostrarDatos(data) {
     });
 }
 
-function guardarEvento(){
+function guardarEvento() {
     console.log('eventoModificado');
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
-        url: rootURL + 'evento/'+jsonEvento.id,
+        url: rootURL + 'evento/' + jsonEvento.id,
         data: formToJSON(),
         success: function (response) {
             console.log(response);
@@ -98,33 +100,37 @@ function guardarEvento(){
 
 function formToJSON() {
     console.log($('#selectTag').val());
-
-    if ($('#selectTag').val() == null) {
-        return JSON.stringify({
-            creador: localStorage.getItem('emailUsuario'),
-            descripcion: $('#descripcionEvento').val(),
-            direccion: $('#direccionEvento').val(),
-            fechainicio: $('#fechainicio').val(),
-            fechafin: $('#fechafin').val(),
-            longitud: $('#longitudEvento').val(),
-            latitud: $('#latitudEvento').val(),
-            nombre: $('#nombreEvento').val(),
-            validado: jsonEvento.validado
-        }
-        );
-    } else {
-        return JSON.stringify({
-            creador: localStorage.getItem('emailUsuario'),
-            descripcion: $('#descripcionEvento').val(),
-            direccion: $('#direccionEvento').val(),
-            fechainicio: $('#fechainicio').val(),
-            fechafin: $('#fechafin').val(),
-            longitud: $('#longitudEvento').val(),
-            latitud: $('#latitudEvento').val(),
-            nombre: $('#nombreEvento').val(),
-            tags: $('#selectTag').val(),
-            validado: jsonEvento.validado
-        }
-        );
+    var json = JSON.stringify({
+        creador: localStorage.getItem('emailUsuario'),
+        descripcion: $('#descripcionEvento').val(),
+        direccion: $('#direccionEvento').val(),
+        fechainicio: $('#fechainicio').val(),
+        fechafin: $('#fechafin').val(),
+        longitud: $('#longitudEvento').val(),
+        latitud: $('#latitudEvento').val(),
+        nombre: $('#nombreEvento').val(),
+        tags: check(),
+        validado: jsonEvento.validado
     }
+    );
+    console.log(json);
+    return json;
+}
+
+
+function mostrarChecked() {
+    for (tag in jsonEvento.tags) {
+        document.getElementById(jsonEvento.tags[tag]).checked = true;
+    }
+}
+
+function check() {
+    listTagEvento = [];
+    $('#.check:checked').each(function () {
+        console.log($(this));
+        var tag = $(this).attr('id');
+        listTagEvento.push(tag);
+    });
+    console.log(listTagEvento);
+    return listTagEvento;
 }
