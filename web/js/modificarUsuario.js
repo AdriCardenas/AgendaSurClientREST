@@ -8,7 +8,7 @@ var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.
 
 var jsonUsuario;
 
-var listTagUsuario;
+var listTagUsuario = new Array();
 
 $(document).ready(function () {
     
@@ -21,8 +21,8 @@ jsonUsuario = JSON.parse(retrievedObject);
     document.getElementById('apellidos').value = jsonUsuario.apellidos;
     document.getElementById('email').value = jsonUsuario.email;
     document.getElementById('tipoUsuario').value = jsonUsuario.tipoUsuario;
-    findAllTag();
-    findAllTagUsuario();
+    
+    mostrarChecked();
 
 });
 
@@ -31,53 +31,8 @@ function cancelar(){
     return false;
 }
 
-function findAllTag() {
-    console.log(rootURL + 'tag');
-    $.ajax({
-        type: 'GET',
-        url: rootURL + 'tag',
-        contentType: 'application/json',
-        dataType: "json", // data type of response
-        success: mostrarDatos
-    });
-}
-
-function findAllTagUsuario() {
-    console.log(rootURL + 'tag/tagsByUser/' + jsonUsuario.email);
-    $.ajax({
-        type: 'GET',
-        url: rootURL + 'tag/tagsByUser/' + jsonUsuario.email,
-        contentType: 'application/json',
-        dataType: "json", // data type of response
-        success: guardarTag
-    });
-}
-
-function guardarTag(data) {
-    listTagUsuario = data == null ? [] : (data instanceof Array ? data : [data]);
-
-    $.each(listTagUsuario, function (index, tag) {
-        console.log(tag.nombre);
-        var select = $('#' + tag.id);
-        select.attr("selected", "selected");
-    });
-}
-
-function mostrarDatos(data) {
-    var list = data == null ? [] : (data instanceof Array ? data : [data]);
-
-    $.each(list, function (index, tag) {
-        console.log(tag.nombre);
-        var select = $('<option></option><br/>');
-        select.val(tag.nombre);
-        select.append(tag.nombre);
-        select.attr("id", tag.id);
-        $('#selectTag').append(select);
-    });
-}
-
 function guardarUsuario(){
-    console.log('usuarioModificado');
+    console.log(formToJSON());
     $.ajax({
         type: 'PUT',
         contentType: 'application/json',
@@ -93,11 +48,15 @@ function guardarUsuario(){
     });
 }
 
+function mostrarChecked() {
+    for (tag in jsonUsuario.tagsUsuario) {
+        document.getElementById(jsonUsuario.tagsUsuario[tag]).checked = true;
+    }
+}
 
 function formToJSON() {
-    console.log($('#selectTag').val());
 
-    if ($('#selectTag').val() == null) {
+    /*if ($('#selectTag').val() == null) {
         return JSON.stringify({
             apellidos: $('#apellidos').val(), 
             email: $('#email').val(),
@@ -106,14 +65,24 @@ function formToJSON() {
             
         }
         );
-    } else {
+    } else {*/
         return JSON.stringify({
             apellidos: $('#apellidos').val(), 
             email: $('#email').val(),
             nombre: $('#nombre').val(),
             tipoUsuario: $('#tipoUsuario').val(),
-            tags: $('#selectTag').val()       
+            tagsUsuario: check()       
         }
         );
-    }
+    //}
+}
+
+function check() {
+    $('#.check:checked').each(function () {
+        console.log($(this)); 
+        var tag = $(this).attr('id');
+        listTagUsuario.push(tag);
+    });
+    console.log(listTagUsuario);
+    return listTagUsuario;
 }

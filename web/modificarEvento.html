@@ -32,11 +32,38 @@ and open the template in the editor.
             <input id="latitudEvento" required type="text" value="" /><br/>
             <h4>Longitud</h4>
             <input id="longitudEvento" required type="text" value="" /><br/>
-            <select multiple class="form-control" id="selectTag">
-                
-            </select><br/>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Adult" value="Adult">Adult</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Culture" value="Culture">Culture</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Drink" value="Drink">Drink</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Fitness" value="Fitness">Fitness</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Food" value="Food">Food</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Music" value="Music">Music</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Sport" value="Sport">Sport</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Student" value="Student">Student</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Technology" value="Technology">Technology</label>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" class="check" id="Tours" value="Tours">Tours</label>
+            </div><br/>
             <button id="guardar" class="btn btn-success" onclick="guardarEvento()">Guardar</button>
-            <button id="cancelar" class="btn btn-success" onclick="cancelar()">Cancelar</button>
+            <button id="cancelar" class="btn btn-danger" onclick="cancelar()">Cancelar</button>
         </div>
     </body>
 </html>
