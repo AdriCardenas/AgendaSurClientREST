@@ -25,6 +25,7 @@ and open the template in the editor.
         <script src="js/jquery-1.7.1.min.js"></script>
         <!-- <script src="js/bootstrap.min.js"></script> -->
         <script src="js/byTag.js"></script>
+        <script src="js/main.js"></script>
         <!-- <script src="js/index.js"></script> -->
         <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
@@ -44,7 +45,7 @@ and open the template in the editor.
                 <button id="btnGeo" class="btn btn-info" onclick="findEventosByLocation()">Buscar por geolocalizacion</button>
                 <button id="btnNoValidados" class="btn btn-info" onclick="findEventosNoValidados()">Buscar no validados</button>
                 <button id="btnAdminUsuarios" class="btn btn-info" onclick="goToAdmin()">Administracion de usuarios</button>
-                <button id="btnLogout" class="btn btn-danger" onclick="handleSignOutClick()">Log out</button>
+                <button id="btnLogout" class="btn btn-danger" onclick="handleClientLoad()">Log out</button>
                 <br/><br/>
                 <button id="btnTags" class="btn btn-info" onclick="findEventosByTags()">Buscar por tag</button>
                 <label class="radio-inline"><input class="inputRadio" name="optRadio" type="radio" value="Adult">Adult</label>

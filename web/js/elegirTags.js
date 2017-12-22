@@ -22,7 +22,7 @@ $(document).ready(function () {
 });
 
 function cancelar() {
-    window.location = "listadoUsuarios.html";
+    window.location = "listadoEventos.html";
     return false;
 }
 
