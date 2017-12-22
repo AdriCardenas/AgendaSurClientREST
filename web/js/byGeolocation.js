@@ -99,16 +99,6 @@ function findAllByGeolocalization() {
     });
 }
 
-function findAll() {
-    console.log('findAll');
-    $.ajax({
-        type: 'GET',
-        url: rootURL + "/eventosNoCaducadosYValidados",
-        dataType: "json", // data type of response
-        success: renderList
-    });
-}
-
 function deleteEvent(id) {
     console.log('deleteEvent');
     $.ajax({
@@ -153,7 +143,7 @@ function renderList(data) {
 
         col1.append(buttonVer);
         cell.append(col1);
-        if (!esAdmin()) {
+        if (esAdmin()) {
 
             var buttonModificar = document.createElement("button");
             buttonModificar.className = 'btn btn-warning';
