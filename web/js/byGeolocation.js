@@ -28,7 +28,6 @@ $(document).ready(function () {
     } else {
         console.log("Geolocation is not supported by this browser.");
     }
-    findAllByGeolocalization();
 });
 
 
@@ -81,6 +80,7 @@ function goToAdmin() {
 function showPosition(position) {
     latitud = position.coords.latitude;
     longitud = position.coords.longitude;
+    findAllByGeolocalization();
 }
 
 function findEventosByLocation() {
