@@ -1,21 +1,13 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+var usuarioSesion = JSON.parse(localStorage.getItem('usuarioSesion'));
+var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.";
 
 $(document).ready(function () {
 
-    var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.";
-
-    $('#crearEvento').click(function () {
-        addEvent();
-        return false;
-    });
-
     findAllTag();
 
-    function findAllTag() {
+});
+
+function findAllTag() {
         console.log(rootURL + 'tag');
         $.ajax({
             type: 'GET',
@@ -58,7 +50,7 @@ $(document).ready(function () {
 
         if ($('#selectTag').val() == null ) {
             return JSON.stringify({
-                creador: localStorage.getItem('emailUsuario'),
+                creador: usuarioSesion.email,
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),
@@ -70,7 +62,7 @@ $(document).ready(function () {
             );
         } else {
             return JSON.stringify({
-                creador: localStorage.getItem('emailUsuario'),
+                creador: usuarioSesion.email,
                 descripcion: $('#descripcionEvento').val(),
                 direccion: $('#direccionEvento').val(),
                 fechainicio: $('#fechainicio').val(),
@@ -83,7 +75,4 @@ $(document).ready(function () {
             );
         }
 
-
     }
-
-});

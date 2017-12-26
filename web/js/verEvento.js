@@ -38,14 +38,6 @@ $(document).ready(function () {
 
     buscarComentariosDeEvento();
 
-    $('#botonEnviarComentario').click(function () {
-        enviarComentario();
-    });
-
-    $('#botonMeGusta').click(function () {
-        enviarMeGusta();
-    });
-
     initMap();
 
 });
@@ -188,4 +180,8 @@ function enviarMeGusta() {
             alert('Ha dado un me gusta a este evento.');
         }
     });
+}
+
+function volver(){
+    window.location = "listadoEventos.html";
 }

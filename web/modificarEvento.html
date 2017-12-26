@@ -17,53 +17,71 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="container">
-            <h4>Nombre</h4>
-            <input id="nombreEvento" required type="text" value="" /><br/>
-            <h4>Descripción</h4>
-            <textarea id="descripcionEvento" required rows="6" cols="80" style="resize: none;"></textarea><br/>
-            <h4>Fecha inicio</h4>
-            <input id="fechainicio" required type="datetime-local" value="" ><br/>
-            <h4>Fecha fin</h4>
-            <input id="fechafin" required type="datetime-local" value=""><br/>
-            <h4>Dirección</h4>
-            <input id="direccionEvento" required type="text" value="" /><br/>
-            <h4>Latitud</h4>
-            <input id="latitudEvento" required type="text" value="" /><br/>
-            <h4>Longitud</h4>
-            <input id="longitudEvento" required type="text" value="" /><br/>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Adult" value="Adult">Adult</label>
+        <div class="container container2">
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Nombre</label>
+                    <input type="text" required class="form-control" id="nombreEvento">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Culture" value="Culture">Culture</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Descripción</label>
+                    <textarea id="descripcionEvento" class="form-control" required rows="6" cols="80" style="resize: none;"></textarea>
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Drink" value="Drink">Drink</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Fecha inicio</label>
+                    <input id="fechainicio" required class="form-control" type="datetime-local">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Fitness" value="Fitness">Fitness</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Fecha fin</label>
+                    <input id="fechafin" required class="form-control" type="datetime-local">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Food" value="Food">Food</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Dirección</label>
+                    <input id="direccionEvento" required class="form-control" type="text" />
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Music" value="Music">Music</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Latitud</label>
+                    <input id="latitudEvento" required class="form-control" type="text" />
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Sport" value="Sport">Sport</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Longitud</label>
+                    <input id="longitudEvento" required class="form-control" type="text" value="" />
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Student" value="Student">Student</label>
+            <div class="row">
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="check" id="Adult" value="Adult">Adult</label>
+                        <label><input type="checkbox" class="check" id="Culture" value="Culture">Culture</label>
+                        <label><input type="checkbox" class="check" id="Drink" value="Drink">Drink</label>
+                        <label><input type="checkbox" class="check" id="Fitness" value="Fitness">Fitness</label>
+                        <label><input type="checkbox" class="check" id="Food" value="Food">Food</label>
+                        <label><input type="checkbox" class="check" id="Music" value="Music">Music</label>
+                        <label><input type="checkbox" class="check" id="Sport" value="Sport">Sport</label>
+                        <label><input type="checkbox" class="check" id="Student" value="Student">Student</label>
+                        <label><input type="checkbox" class="check" id="Technology" value="Technology">Technology</label>
+                        <label><input type="checkbox" class="check" id="Tours" value="Tours">Tours</label>
+                    </div>
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Technology" value="Technology">Technology</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Tours" value="Tours">Tours</label>
-            </div><br/>
+            
             <button id="guardar" class="btn btn-success" onclick="guardarEvento()">Guardar</button>
             <button id="cancelar" class="btn btn-danger" onclick="cancelar()">Cancelar</button>
+            <br/>
+            <br/>
+            
         </div>
     </body>
 </html>

@@ -17,47 +17,50 @@ and open the template in the editor.
     </head>
     <body>
 
-        <div class="container">
-            <h4>Email</h4>
-            <input id="email" required type="text" value="" /><br/>
-            <h4>Nombre</h4>
-            <input id="nombre" required type="text" value=""/><br/>
-            <h4>Apellidos</h4>
-            <input id="apellidos" required type="text" value=""><br/>
-            <h4>Tipo</h4>
-            <input id="tipoUsuario" required type="text" value="" /><br/>
-            <h4>Tags</h4>           
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Adult" value="Adult">Adult</label>
+        <div class="container container2">
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Email</label>
+                    <input type="text" required class="form-control" id="email">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Culture" value="Culture">Culture</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Nombre</label>
+                    <input type="text" required class="form-control" id="nombre">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Drink" value="Drink">Drink</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Apellidos</label>
+                    <input type="text" required class="form-control" id="apellidos">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Fitness" value="Fitness">Fitness</label>
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Tipo</label>
+                    <input type="text" required class="form-control" id="tipoUsuario">
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Food" value="Food">Food</label>
+            
+            <div class="row">
+                <div class="form-group">
+                    <label for="usr">Tags</label>
+                    <div class="checkbox">
+                        <label><input type="checkbox" class="check" id="Adult" value="Adult">Adult</label>
+                        <label><input type="checkbox" class="check" id="Culture" value="Culture">Culture</label>
+                        <label><input type="checkbox" class="check" id="Drink" value="Drink">Drink</label>
+                        <label><input type="checkbox" class="check" id="Fitness" value="Fitness">Fitness</label>
+                        <label><input type="checkbox" class="check" id="Food" value="Food">Food</label>
+                        <label><input type="checkbox" class="check" id="Music" value="Music">Music</label>
+                        <label><input type="checkbox" class="check" id="Sport" value="Sport">Sport</label>
+                        <label><input type="checkbox" class="check" id="Student" value="Student">Student</label>
+                        <label><input type="checkbox" class="check" id="Technology" value="Technology">Technology</label>
+                        <label><input type="checkbox" class="check" id="Tours" value="Tours">Tours</label>
+                    </div>
+                </div>
             </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Music" value="Music">Music</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Sport" value="Sport">Sport</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Student" value="Student">Student</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Technology" value="Technology">Technology</label>
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" class="check" id="Tours" value="Tours">Tours</label>
-            </div>
-            <button id="guardar" class="btn btn-success" onclick="guardarUsuario()">Guardar</button>
+                        <button id="guardar" class="btn btn-success" onclick="guardarUsuario()">Guardar</button>
             <button id="cancelar" class="btn btn-danger" onclick="cancelar()">Cancelar</button>
             <br><br/>
         </div>

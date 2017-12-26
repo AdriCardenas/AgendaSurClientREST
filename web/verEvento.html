@@ -7,13 +7,12 @@ and open the template in the editor.
 <html>
     <head>
         <title>Ver Evento</title>
-        <style>
-            body{
-                background-color: #8bd4ff
-            }
-        </style>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="js/verEvento.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ88yUrHYcUimr-N19KWUK5W5PjDLjrzQ&callback=initMap"
@@ -33,7 +32,7 @@ and open the template in the editor.
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container container2">
             <div class="row">
                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
@@ -87,7 +86,7 @@ and open the template in the editor.
                         <div class="panel-heading">Dirección</div>
                         <div class="panel-body"><p id="direccionEvento"></p></div>
                     </div>
-                    <div style="width:1000px; height:400px;">
+                    <div style="width:930px; height:600px; margin: 10px;">
                         <div id="map-canvas" style="width: 100%; height: 90%"></div>
                     </div>
 
@@ -97,9 +96,10 @@ and open the template in the editor.
                     <div>
                         <textarea id="comentarioTextarea" required rows="6" cols="80" style="resize: none;"></textarea><br/>
                     </div>
-                    <button id="botonEnviarComentario" class="btn btn-info">Enviar comentario</button>
-                    <button id="botonMeGusta" class="btn btn-info">Me gusta</button>
-
+                    <br/>
+                    <button id="botonEnviarComentario" class="btn btn-info" onclick="enviarComentario()">Enviar comentario</button>
+                    <button id="botonMeGusta" class="btn btn-info" onclick="enviarMeGusta()">Me gusta</button>
+                    <button id="botonVolver" class="btn btn-danger" onclick="volver()">Volver atras</button>
                 </div>
             </div>
 

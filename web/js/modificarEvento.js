@@ -2,6 +2,7 @@
 var rootURL = "http://localhost:8080/AgendaSurServerREST/webresources/agendasur.entity.";
 
 var jsonEvento;
+var usuarioSesion = JSON.parse(localStorage.getItem('usuarioSesion'));
 
 var listTagEvento = new Array();
 
@@ -101,7 +102,7 @@ function guardarEvento() {
 function formToJSON() {
     console.log($('#selectTag').val());
     var json = JSON.stringify({
-        creador: localStorage.getItem('emailUsuario'),
+        creador: usuarioSesion.email,
         descripcion: $('#descripcionEvento').val(),
         direccion: $('#direccionEvento').val(),
         fechainicio: $('#fechainicio').val(),
